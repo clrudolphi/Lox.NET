@@ -6,7 +6,7 @@ namespace Lox
     {
         public static Nothing None { get; } = Nothing.Instance;
     }
-    abstract class Option<T>
+    public abstract class Option<T>
     {
       
         public static implicit operator Option<T>(T value)
@@ -36,7 +36,7 @@ namespace Lox
 
     }
 
-    class Some<T> : Option<T>
+    public class Some<T> : Option<T>
     {
         public T Value { get; }
 
@@ -61,7 +61,7 @@ namespace Lox
 
     }
 
-    class None<T> : Option<T>
+    public class None<T> : Option<T>
     {
         public override Option<TResult> Map<TResult>(Func<T, TResult> map)
         {

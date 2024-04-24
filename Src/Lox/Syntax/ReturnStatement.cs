@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Lox
 {
-    class ReturnStatement : SyntaxNode 
+    public class ReturnStatement : SyntaxNode, IVisitable
     {
         public Token Keyword {get;}
         public SyntaxNode Value {get;}
@@ -17,6 +17,11 @@ namespace Lox
         public override IEnumerable<SyntaxNode> GetChildren()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void Accept(ISyntaxNodeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Lox
 {
-    class WhileStatement : SyntaxNode
+    public class WhileStatement : SyntaxNode
     {
         
         public SyntaxNode Condition {get;}

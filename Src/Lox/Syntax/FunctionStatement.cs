@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Lox
 {
-    class FunctionStatement : SyntaxNode 
+    public class FunctionStatement : SyntaxNode 
     {
         public Token Name {get;}
         public List<Token> Parameters {get;}
@@ -21,5 +21,6 @@ namespace Lox
         {
             throw new System.NotImplementedException();
         }
+
     }
 }

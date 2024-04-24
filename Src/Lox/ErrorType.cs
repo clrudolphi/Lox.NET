@@ -1,6 +1,6 @@
 ﻿namespace Lox
 {
-    enum ErrorType
+    public enum ErrorType
     {
         SyntaxError,
         SemanticError

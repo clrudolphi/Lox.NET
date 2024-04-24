@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Lox
 {
-    sealed class UnaryExpression : SyntaxNode
+    public sealed class UnaryExpression : SyntaxNode, IVisitable
     {
         public SyntaxNode Right { get; }
         public Token Operator { get; }
@@ -20,6 +20,11 @@ namespace Lox
         public override IEnumerable<SyntaxNode> GetChildren()
         {
             return Array.Empty<SyntaxNode>().ToArray().AsEnumerable();
+        }
+
+        public void Accept(ISyntaxNodeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
 
 

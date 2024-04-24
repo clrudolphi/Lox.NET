@@ -3,7 +3,7 @@ using static Lox.Functional;
 
 namespace Lox
 {
-    sealed class LiteralExpression : SyntaxNode
+    public sealed class LiteralExpression : SyntaxNode, IVisitable
     {
         public Option<object> Value { get; }
 
@@ -17,6 +17,11 @@ namespace Lox
         public override IEnumerable<SyntaxNode> GetChildren()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void Accept(ISyntaxNodeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

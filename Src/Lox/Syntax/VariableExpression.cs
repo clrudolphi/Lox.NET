@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Lox
 {
-    class VariableExpression : SyntaxNode
+    public class VariableExpression : SyntaxNode, IVisitable
     {
         public Token Name { get; }
 
@@ -19,6 +19,11 @@ namespace Lox
         public override IEnumerable<SyntaxNode> GetChildren()
         {
             return Array.Empty<SyntaxNode>().ToArray().AsEnumerable();
+        }
+
+        public void Accept(ISyntaxNodeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

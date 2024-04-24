@@ -2,7 +2,7 @@
 
 namespace Lox
 {
-    class AssignmentExpression : SyntaxNode
+    public class AssignmentExpression : SyntaxNode, IVisitable
     {
         public Token Name { get; }
         public SyntaxNode Value { get; }
@@ -18,6 +18,11 @@ namespace Lox
         public override IEnumerable<SyntaxNode> GetChildren()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void Accept(ISyntaxNodeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

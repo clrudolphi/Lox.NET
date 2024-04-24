@@ -2,7 +2,7 @@
 
 namespace Lox
 {
-    sealed class GroupingExpression : SyntaxNode
+    public sealed class GroupingExpression : SyntaxNode, IVisitable
     {
         public SyntaxNode Expression { get; }
 
@@ -16,6 +16,11 @@ namespace Lox
         public override IEnumerable<SyntaxNode> GetChildren()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void Accept(ISyntaxNodeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

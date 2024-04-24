@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Lox
 {
-    class ThisExpression : SyntaxNode 
+    public class ThisExpression : SyntaxNode 
     {
         public Token Keyword {get;}
         public override SyntaxKind Kind => SyntaxKind.ThisExpression;

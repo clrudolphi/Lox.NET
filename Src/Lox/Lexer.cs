@@ -35,7 +35,7 @@ namespace Lox
             ["print"] = SyntaxKind.Print,
         };
 
-        internal IEnumerable<Token> GetTokens()
+        public IEnumerable<Token> GetTokens()
         {
             return _tokens;
         }

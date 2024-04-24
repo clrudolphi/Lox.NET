@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Lox
 {
-    class SuperExpression : SyntaxNode
+    public class SuperExpression : SyntaxNode
     {
         public Token Keyword {get;}
         public Token Method {get;}
@@ -19,5 +19,6 @@ namespace Lox
         {
             throw new System.NotImplementedException();
         }
+
     }
 }

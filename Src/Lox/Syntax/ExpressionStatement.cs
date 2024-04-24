@@ -2,7 +2,7 @@
 
 namespace Lox
 {
-    class ExpressionStatement : SyntaxNode
+    public class ExpressionStatement : SyntaxNode, IVisitable
     {
         public SyntaxNode Expression { get; }
         public override SyntaxKind Kind => SyntaxKind.ExpressionStatement;
@@ -15,6 +15,11 @@ namespace Lox
         public override IEnumerable<SyntaxNode> GetChildren()
         {
             throw new System.NotImplementedException();
+        }
+
+        public void Accept(ISyntaxNodeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

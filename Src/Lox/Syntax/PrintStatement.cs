@@ -2,7 +2,7 @@
 
 namespace Lox
 {
-    public class PrintStatement : SyntaxNode
+    public class PrintStatement : SyntaxNode, IVisitable
     {
         public SyntaxNode Expression { get; }
 
@@ -16,6 +16,11 @@ namespace Lox
         public override IEnumerable<SyntaxNode> GetChildren()
         {
             yield return Expression;
+        }
+
+        public void Accept(ISyntaxNodeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

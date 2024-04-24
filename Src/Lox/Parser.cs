@@ -2,7 +2,7 @@
 
 namespace Lox
 {
-    internal sealed class Parser
+    public sealed class Parser
     {
         private readonly IList<Token> _tokens;
         private readonly List<Error> _errors = new List<Error>();

@@ -3,7 +3,7 @@ using System.Runtime.CompilerServices;
 
 namespace Lox
 {
-    sealed class Error
+    public sealed class Error
     {
         public int Line { get; }
         public string Message { get; }

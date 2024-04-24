@@ -4,15 +4,18 @@ using System.IO;
 
 namespace Lox
 {
-    public abstract class SyntaxNode
+    public interface IMetaTag { } // marker for things that can be added to a syntax node
+    public abstract class SyntaxNode 
     {
         //SyntaxKind Kind { get; }
         public abstract SyntaxKind Kind { get; }
 
 
-
         public abstract IEnumerable<SyntaxNode> GetChildren();
 
+        public IList<IMetaTag> Tags { get; } = new List<IMetaTag>();
+
+        public SyntaxNode Parent { get; set; }
 
         //private static void PrettyPrint(TextWriter writer, SyntaxNode node, string indent = "", bool isLast = true)
         //{
@@ -89,4 +92,5 @@ namespace Lox
         //        PrettyPrint(writer, child, indent, child == lastChild);
         //}
     }
+
 }

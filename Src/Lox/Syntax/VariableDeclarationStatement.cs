@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Lox
 {
-    class VariableDeclarationStatement : SyntaxNode
+    public class VariableDeclarationStatement : SyntaxNode, IVisitable
     {
         public Token Name { get; }
         public SyntaxNode Initializer { get; }
@@ -20,6 +20,11 @@ namespace Lox
         public override IEnumerable<SyntaxNode> GetChildren()
         {
              return Array.Empty<SyntaxNode>().ToArray().AsEnumerable();
+        }
+
+        public void Accept(ISyntaxNodeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }

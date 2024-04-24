@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using System.Linq;
 
 namespace Lox
 {
@@ -9,28 +8,8 @@ namespace Lox
 
     }
 
-    public sealed class SyntaxTree
-    {
-        public SyntaxTree(IEnumerable<string> diagnostics, ExpressionSyntax root, Token endOfFileToken)
-        {
-            Diagnostics = diagnostics.ToArray();
-            Root = root;
-            EndOfFileToken = endOfFileToken;
-        }
 
-        public IReadOnlyList<string> Diagnostics { get; }
-        public ExpressionSyntax Root { get; }
-        public Token EndOfFileToken { get; }
-
-        //public static SyntaxTree Parse(string text)
-        //{
-        //    Parser parser = new Parser(text);
-        //    return parser.Parse() /*new Parser(text).Parse()*/;
-        //}
-    }
-
-
-    public class BinaryExpression : SyntaxNode
+    public class BinaryExpression : SyntaxNode, IVisitable
     {
         public SyntaxNode Left { get; }
         public SyntaxNode Right { get; }
@@ -50,6 +29,11 @@ namespace Lox
             yield return Left;
             yield return Operator;
             yield return Right;
+        }
+
+        public void Accept(ISyntaxNodeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }
