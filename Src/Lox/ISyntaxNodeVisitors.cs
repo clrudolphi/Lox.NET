@@ -2,17 +2,18 @@
 {
     public interface ISyntaxNodeVisitor
     {
-        void Visit(BinaryExpression node);
+        void Visit(BlockStatement node);
         void Visit(ExpressionStatement node);
-        void Visit(GroupingExpression node);
-        void Visit(LiteralExpression node);
         void Visit(PrintStatement node);
-        void Visit(UnaryExpression node);
         void Visit(ReturnStatement node);
         void Visit(VariableDeclarationStatement node);
+        void Visit(IfStatement node);
+        void Visit(BinaryExpression node);
+        void Visit(UnaryExpression node);
         void Visit(VariableExpression node);
-        void Visit(BlockStatement node);
+        void Visit(GroupingExpression node);
         void Visit(AssignmentExpression node);
+        void Visit(LiteralExpression node);
     }
 
 

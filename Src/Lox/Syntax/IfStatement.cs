@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Lox
 {
-    public class IfStatement : SyntaxNode 
+    public class IfStatement : SyntaxNode, IVisitable
     {
         public SyntaxNode Condition {get;}
         public SyntaxNode ThenBranch {get;}
@@ -21,5 +21,9 @@ namespace Lox
             throw new System.NotImplementedException();
         }
 
+        public void Accept(ISyntaxNodeVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }

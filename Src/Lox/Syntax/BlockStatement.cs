@@ -2,7 +2,7 @@
 
 namespace Lox
 {
-    public sealed class BlockStatement : SyntaxNode
+    public sealed class BlockStatement : SyntaxNode, IVisitable
     {
         public List<SyntaxNode> Statements { get; }
         public override SyntaxKind Kind => SyntaxKind.BlockStatement;
@@ -17,5 +17,9 @@ namespace Lox
             throw new System.NotImplementedException();
         }
 
+        public void Accept(ISyntaxNodeVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }
