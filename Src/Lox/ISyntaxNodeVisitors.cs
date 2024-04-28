@@ -8,6 +8,7 @@
         void Visit(ReturnStatement node);
         void Visit(VariableDeclarationStatement node);
         void Visit(IfStatement node);
+        void Visit(FunctionStatement node);
         void Visit(BinaryExpression node);
         void Visit(UnaryExpression node);
         void Visit(VariableExpression node);

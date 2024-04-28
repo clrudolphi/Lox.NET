@@ -24,7 +24,7 @@ namespace Lox
             ["or"] = SyntaxKind.OrOr,
             ["for"] = SyntaxKind.For,
             ["while"] = SyntaxKind.While,
-            ["funtion"] = SyntaxKind.Fun,
+            ["fun"] = SyntaxKind.Fun,
             ["null"] = SyntaxKind.Nil,
             ["return"] = SyntaxKind.Return,
             ["class"] = SyntaxKind.Class,
