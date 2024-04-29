@@ -10,6 +10,7 @@
         void Visit(IfStatement node);
         void Visit(WhileStatement node);
         void Visit(FunctionStatement node);
+        void Visit(ClassStatement node);
         void Visit(BinaryExpression node);
         void Visit(UnaryExpression node);
         void Visit(VariableExpression node);

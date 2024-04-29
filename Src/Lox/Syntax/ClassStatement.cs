@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Lox
 {
-    public class ClassStatement : SyntaxNode 
+    public class ClassStatement : SyntaxNode, IVisitable
     {
         public Token Name {get;}
         public List<FunctionStatement> Methods {get;}
@@ -23,5 +23,9 @@ namespace Lox
             throw new System.NotImplementedException();
         }
 
+        public void Accept(ISyntaxNodeVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }
