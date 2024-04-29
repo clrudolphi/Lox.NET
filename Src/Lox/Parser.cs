@@ -414,6 +414,7 @@ namespace Lox
                     }
 
                 case SyntaxKind.LeftParen:
+                    Match(SyntaxKind.LeftParen);
                     SyntaxNode expr = ParseExpression();
                     Consume(SyntaxKind.RightParen, "Expect ')' after expression");
                     return new GroupingExpression(expr);

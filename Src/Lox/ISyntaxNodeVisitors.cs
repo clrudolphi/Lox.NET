@@ -15,6 +15,7 @@
         void Visit(GroupingExpression node);
         void Visit(AssignmentExpression node);
         void Visit(LiteralExpression node);
+        void Visit(CallExpression node);
     }
 
 

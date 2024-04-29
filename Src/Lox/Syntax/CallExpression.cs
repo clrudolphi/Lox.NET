@@ -2,7 +2,7 @@ using System.Collections.Generic;
 
 namespace Lox
 {
-    public class CallExpression : SyntaxNode 
+    public class CallExpression : SyntaxNode, IVisitable
     {
         public SyntaxNode Callee {get;}
         public Token Paren {get;}
@@ -23,5 +23,9 @@ namespace Lox
             throw new System.NotImplementedException();
         }
 
+        public void Accept(ISyntaxNodeVisitor visitor)
+        {
+            visitor.Visit(this);
+        }
     }
 }
