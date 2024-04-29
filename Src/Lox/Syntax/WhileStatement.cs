@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace Lox
 {
-    public class WhileStatement : SyntaxNode
+    public class WhileStatement : SyntaxNode, IVisitable
     {
         
         public SyntaxNode Condition {get;}
@@ -20,6 +20,11 @@ namespace Lox
         public override IEnumerable<SyntaxNode> GetChildren()
         {
             return Array.Empty<SyntaxNode>().ToArray().AsEnumerable();
+        }
+
+        public void Accept(ISyntaxNodeVisitor visitor)
+        {
+            visitor.Visit(this);
         }
     }
 }
