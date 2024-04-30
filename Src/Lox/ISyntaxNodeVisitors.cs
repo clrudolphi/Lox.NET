@@ -18,6 +18,7 @@
         void Visit(AssignmentExpression node);
         void Visit(LiteralExpression node);
         void Visit(CallExpression node);
+        void Visit(GetExpression node);
     }
 
 
