@@ -27,6 +27,11 @@ namespace Lox
             visitor.Visit(this);
         }
 
+        public T Accept<T>(ISyntaxNodeVisitor<T> visitor)
+        {
+            return visitor.Visit(this);
+        }
+
 
         //public IEnumerable<SyntaxNode> GetNodes()
         //{
