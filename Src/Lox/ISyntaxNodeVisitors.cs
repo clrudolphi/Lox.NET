@@ -21,6 +21,7 @@
         void Visit(SetExpression node);
         void Visit(GetExpression node);
         void Visit(ThisExpression node);
+        void Visit(SuperExpression node);
     }
 
     public interface ISyntaxNodeVisitor<T>
@@ -44,6 +45,7 @@
         T Visit(SetExpression node);
         T Visit(GetExpression node);
         T Visit(ThisExpression node);
+        T Visit(SuperExpression node);
     }
 
     public interface IVisitable
