@@ -20,7 +20,7 @@ namespace Lox
         public Error(ErrorType type, int line, string where, string message)
         {
             this.Type = type;
-            this.Line = Line;
+            this.Line = line;
             this.Message = message;
             this.Where = where;
         }

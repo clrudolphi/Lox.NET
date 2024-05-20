@@ -96,7 +96,7 @@ namespace Lox
             VariableExpression superclass = null;
             if (Match(SyntaxKind.Less))
             {
-                Consume(SyntaxKind.Identifier, "Expect superclass name");
+                Consume(SyntaxKind.Identifier, "Expect superclass name.");
                 superclass = new VariableExpression(Previous());
             }
             Consume(SyntaxKind.LeftBrace, "Expect '{' before class body.");
@@ -111,9 +111,9 @@ namespace Lox
 
         private SyntaxNode ParseFunctionDeclaration(string kind)
         {
-            Consume(SyntaxKind.Identifier, $"Expect {kind} name");
+            Consume(SyntaxKind.Identifier, $"Expect {kind} name.");
             Token name = Previous();
-            Consume(SyntaxKind.LeftParen, $"Expect '(' after {kind} name");
+            Consume(SyntaxKind.LeftParen, $"Expect '(' after {kind} name.");
             List<Token> parameters = new List<Token>();
             if (!Check(SyntaxKind.RightParen))
             {
@@ -121,17 +121,17 @@ namespace Lox
                 {
                     if (parameters.Count > 255)
                     {
-                        Error(Peek(), "Cannot have morethan 255 parameters");
+                        Error(Peek(), "Can't have more than 255 parameters.");
                     }
 
-                    Consume(SyntaxKind.Identifier, "Expect parameter name");
+                    Consume(SyntaxKind.Identifier, "Expect parameter name.");
                     parameters.Add(Previous());
                 } while (Match(SyntaxKind.Comma));
             }
 
             Consume(SyntaxKind.RightParen, "Expect ')' after parameters.");
 
-            Consume(SyntaxKind.LeftBrace, $"Expect '{{' before {kind} body");
+            Consume(SyntaxKind.LeftBrace, $"Expect '{{' before {kind} body.");
             BlockStatement body = ParseBlockStatement() as BlockStatement;
             return new FunctionStatement(name, parameters, body.Statements);
         }
@@ -147,7 +147,7 @@ namespace Lox
                 initializer = ParseExpression();
             }
 
-            Consume(SyntaxKind.Semicolon, "Expect ; after variable declaration");
+            Consume(SyntaxKind.Semicolon, "Expect ';' after variable declaration.");
             return new VariableDeclarationStatement(name, initializer);
         }
 
@@ -166,7 +166,7 @@ namespace Lox
 
         private SyntaxNode ParseForStatement()
         {
-            Consume(SyntaxKind.LeftParen, "expect'(' after 'for'.");
+            Consume(SyntaxKind.LeftParen, "Expect'(' after 'for'.");
             SyntaxNode initializer;
             if (Match(SyntaxKind.Semicolon))
             {
@@ -187,7 +187,7 @@ namespace Lox
                 condition = ParseExpression();
             }
 
-            Consume(SyntaxKind.Semicolon, "expect';' after loop condition.");
+            Consume(SyntaxKind.Semicolon, "Expect';' after loop condition.");
 
             SyntaxNode increment = null;
             if (!Check(SyntaxKind.RightParen))
@@ -195,7 +195,7 @@ namespace Lox
                 increment = ParseExpression();
             }
 
-            Consume(SyntaxKind.RightParen, "expect ')' after for clauses.");
+            Consume(SyntaxKind.RightParen, "Expect ')' after for clauses.");
 
             SyntaxNode body = ParseStatement();
 
@@ -222,9 +222,9 @@ namespace Lox
         }
         private SyntaxNode ParseWhileStatement()
         {
-            Consume(SyntaxKind.LeftParen, "expect'(' after 'while'.");
+            Consume(SyntaxKind.LeftParen, "Expect'(' after 'while'.");
             SyntaxNode condition = ParseExpression();
-            Consume(SyntaxKind.RightParen, "expect ')' after condition.");
+            Consume(SyntaxKind.RightParen, "Expect ')' after condition.");
 
             SyntaxNode body = ParseStatement();
             return new WhileStatement(condition, body);
@@ -232,7 +232,7 @@ namespace Lox
 
         private SyntaxNode ParseIfStatement()
         {
-            Consume(SyntaxKind.LeftParen, "expect'(' after if.");
+            Consume(SyntaxKind.LeftParen, "expect'(' after 'if'.");
             SyntaxNode condition = ParseExpression();
             Consume(SyntaxKind.RightParen, "expect ')' after if condition.");
 
@@ -261,13 +261,13 @@ namespace Lox
         private SyntaxNode ParsePrintStatement()
         {
             SyntaxNode expr = ParseExpression();
-            Consume(SyntaxKind.Semicolon, "Expect ; after expression");
+            Consume(SyntaxKind.Semicolon, "Expect ';' after expression.");
             return new PrintStatement(expr);
         }
         private SyntaxNode ParseExpressionStatement()
         {
             SyntaxNode expr = ParseExpression();
-            Consume(SyntaxKind.Semicolon, "Expect ; after expression");
+            Consume(SyntaxKind.Semicolon, "Expect ';' after expression.");
             return new ExpressionStatement(expr);
         }
 
@@ -294,7 +294,7 @@ namespace Lox
                     return new SetExpression(g.Object, g.Name, value);
                 }
 
-                Error(equals, "Invalid Assignment Target");
+                Error(equals, "Invalid assignment target.");
             }
 
             return expr;
@@ -347,7 +347,7 @@ namespace Lox
                 }
                 else if (Match(SyntaxKind.Dot))
                 {
-                    Consume(SyntaxKind.Identifier, "Expect property name after '.'");
+                    Consume(SyntaxKind.Identifier, "Expect property name after '.'.");
                     Token name = Previous();
                     expr = new GetExpression(expr, name);
                 }
@@ -366,7 +366,7 @@ namespace Lox
             {
                 do
                 {
-                    if (arguments.Count > 255)
+                    if (arguments.Count >= 255)
                     {
                         Error(Peek(), "cannot have more than 255 arguments.");
                     }
@@ -406,8 +406,8 @@ namespace Lox
                     {
                         Match(SyntaxKind.Super);
                         Token keyword = Previous();
-                        Consume(SyntaxKind.Dot, "Expect '.' after super");
-                        Consume(SyntaxKind.Identifier, "Expect superclass method name");
+                        Consume(SyntaxKind.Dot, "Expect '.' after 'super'.");
+                        Consume(SyntaxKind.Identifier, "Expect superclass method name.");
                         Token method = Previous();
 
                         return new SuperExpression(keyword, method);
@@ -416,12 +416,12 @@ namespace Lox
                 case SyntaxKind.LeftParen:
                     Match(SyntaxKind.LeftParen);
                     SyntaxNode expr = ParseExpression();
-                    Consume(SyntaxKind.RightParen, "Expect ')' after expression");
+                    Consume(SyntaxKind.RightParen, "Expect ')' after expression.");
                     return new GroupingExpression(expr);
 
             }
 
-            Error(Peek(), "Expect Expression");
+            Error(Peek(), "Expect expression.");
 
             //TODO: fix this
             return null;
