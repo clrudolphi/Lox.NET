@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace Lox
 {
-    internal sealed class Resolver
+    public sealed class Resolver
     {
         private enum FunctionType
         {
@@ -47,6 +47,7 @@ namespace Lox
 
         public Resolver(Evaluator evaluator)
         {
+            BeginScope();
             _evaluator = evaluator;
         }
         public void Resolve(List<SyntaxNode> expressions)
@@ -146,7 +147,7 @@ namespace Lox
             Dictionary<string, bool> scope = _scopes[_scopes.Count - 1];
             if (scope.ContainsKey(name.Lexeme))
             {
-                Error(name, "Variable with this name already declared in this scope.");
+                Error(name, "Already a variable with this name in this scope.");
             }
 
             scope[name.Lexeme] = false;
@@ -282,7 +283,7 @@ namespace Lox
             {
                 if (_currentFunction == FunctionType.Initializer)
                 {
-                    Error(expr.Keyword, "cannot return a value from initializer.");
+                    Error(expr.Keyword, "Can't return a value from an initializer.");
                 }
 
                 Resolve(expr.Value);

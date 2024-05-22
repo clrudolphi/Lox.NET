@@ -268,7 +268,7 @@ namespace Lox
         private SyntaxNode ParseExpressionStatement()
         {
             SyntaxNode expr = ParseExpression();
-            Consume(SyntaxKind.Semicolon, "Expect ';' after expression.");
+            Consume(SyntaxKind.Semicolon, "Expect expression.");
             return new ExpressionStatement(expr);
         }
 

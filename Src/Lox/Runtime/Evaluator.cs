@@ -22,7 +22,7 @@ namespace Lox
         }
     }
 
-    internal class Environment
+    public class Environment
     {
         private readonly Dictionary<string, object?> _values = new Dictionary<string, object?>();
 
@@ -93,7 +93,7 @@ namespace Lox
         }
     }
 
-    internal class Evaluator
+    public class Evaluator
     {
         public Environment Globals { get; }
         private Environment _environment;
