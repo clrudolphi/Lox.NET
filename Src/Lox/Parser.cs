@@ -98,6 +98,7 @@ namespace Lox
             {
                 Consume(SyntaxKind.Identifier, "Expect superclass name.");
                 superclass = new VariableExpression(Previous());
+                if (superclass.Name.Lexeme == name.Lexeme) Error(name, "A class can't inherit from itself.");
             }
             Consume(SyntaxKind.LeftBrace, "Expect '{' before class body.");
             List<FunctionStatement> methods = new List<FunctionStatement>();
