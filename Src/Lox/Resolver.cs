@@ -168,11 +168,11 @@ namespace Lox
         {
             if (_currentClass == ClassType.None)
             {
-                Error(expr.Keyword, "cannot use 'super' outside a class");
+                Error(expr.Keyword, "Can't use 'super' outside of a class.");
             }
             else if (_currentClass != ClassType.SubClass)
             {
-                Error(expr.Keyword, "cannot use 'super' in a class with no superclass.");
+                Error(expr.Keyword, "Can't use 'super' in a class with no superclass.");
             }
             ResolveLocal(expr, expr.Keyword);
         }
@@ -180,7 +180,7 @@ namespace Lox
         {
             if (_currentClass == ClassType.None)
             {
-                Error(expr.Keyword, "cannot use 'this' outside a class.");
+                Error(expr.Keyword, "Can't use 'this' outside of a class.");
             }
             ResolveLocal(expr, expr.Keyword);
         }
@@ -214,7 +214,7 @@ namespace Lox
             {
                 if (_scopes[_scopes.Count - 1].TryGetValue(expr.Name.Lexeme, out bool value) && value == false)
                 {
-                    Error(expr.Name, "cannot read local variable in its own initalizer");
+                    Error(expr.Name, "Can't read local variable in its own initializer.");
                 }
             }
             ResolveLocal(expr, expr.Name);
@@ -276,7 +276,7 @@ namespace Lox
         {
             if (_currentFunction == FunctionType.None)
             {
-                Error(expr.Keyword, "cannot return from top level code");
+                Error(expr.Keyword, "Can't return from top-level code.");
             }
 
             if (expr.Value != null)

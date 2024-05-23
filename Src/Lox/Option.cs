@@ -74,7 +74,7 @@ namespace Lox
 
         public override string ToString()
         {
-            return "null";
+            return "nil";
         }
     }
 

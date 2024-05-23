@@ -369,7 +369,7 @@ namespace Lox
                 {
                     if (arguments.Count >= 255)
                     {
-                        Error(Peek(), "cannot have more than 255 arguments.");
+                        Error(Peek(), "Can't have more than 255 arguments.");
                     }
 
                     arguments.Add(ParseExpression());
