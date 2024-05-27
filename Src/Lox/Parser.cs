@@ -120,7 +120,7 @@ namespace Lox
             {
                 do
                 {
-                    if (parameters.Count > 255)
+                    if (parameters.Count >= 255)
                     {
                         Error(Peek(), "Can't have more than 255 parameters.");
                     }
