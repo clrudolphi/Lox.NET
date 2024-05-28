@@ -47,7 +47,6 @@ namespace Lox
 
         public Resolver(Evaluator evaluator)
         {
-            BeginScope();
             _evaluator = evaluator;
         }
         public void Resolve(List<SyntaxNode> expressions)
