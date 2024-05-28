@@ -40,7 +40,7 @@ namespace Lox
             return _tokens;
         }
 
-        internal IEnumerable<Error> GetErrors()
+        public IEnumerable<Error> GetErrors()
         {
             return _errors;
         }
@@ -122,11 +122,11 @@ namespace Lox
                 case '>': AddToken(Match('=') ? SyntaxKind.GreaterEqual : SyntaxKind.Greater); 
                     break;
 
-                case '&': AddToken(SyntaxKind.And); 
-                    break;
+                //case '&': AddToken(SyntaxKind.And); 
+                //    break;
 
-                case '|': AddToken(SyntaxKind.Or); 
-                    break;
+                //case '|': AddToken(SyntaxKind.Or); 
+                //    break;
 
 
                 case '/':
