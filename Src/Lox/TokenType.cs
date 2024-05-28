@@ -22,18 +22,20 @@
             {
                 case SyntaxKind.Star:
                 case SyntaxKind.Slash:
-                    return 5;
+                    return 6;
 
                 case SyntaxKind.Minus:
                 case SyntaxKind.Plus:
-                    return 4;
+                    return 5;
 
-                case SyntaxKind.EqualEqual:
-                case SyntaxKind.BangEqual:
                 case SyntaxKind.Less:
                 case SyntaxKind.LessEqual:
                 case SyntaxKind.Greater:
                 case SyntaxKind.GreaterEqual:
+                    return 4;
+
+                case SyntaxKind.EqualEqual:
+                case SyntaxKind.BangEqual:
                     return 3;
 
                 case SyntaxKind.AndAnd:
