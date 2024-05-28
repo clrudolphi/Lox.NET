@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Lox
 {
     public sealed class Parser
     {
+        private class ParseError : ApplicationException;
+
         private readonly IList<Token> _tokens;
         private readonly List<Error> _errors = new List<Error>();
 
@@ -71,22 +74,30 @@ namespace Lox
 
         private SyntaxNode ParseDeclaration()
         {
-            if (Match(SyntaxKind.Class))
+            try
             {
-                return ParseClassDeclaration();
-            }
+                if (Match(SyntaxKind.Class))
+                {
+                    return ParseClassDeclaration();
+                }
 
-            if (Match(SyntaxKind.Fun))
+                if (Match(SyntaxKind.Fun))
+                {
+                    return ParseFunctionDeclaration("function");
+                }
+
+                if (Match(SyntaxKind.Var))
+                {
+                    return ParseVariableDeclaration();
+                }
+
+                return ParseStatement();
+            }
+            catch (ParseError error)
             {
-                return ParseFunctionDeclaration("function");
+                Synchronize();
+                return null;
             }
-
-            if (Match(SyntaxKind.Var))
-            {
-                return ParseVariableDeclaration();
-            }
-
-            return ParseStatement();
         }
 
         private SyntaxNode ParseClassDeclaration()
@@ -262,13 +273,13 @@ namespace Lox
         private SyntaxNode ParsePrintStatement()
         {
             SyntaxNode expr = ParseExpression();
-            Consume(SyntaxKind.Semicolon, "Expect ';' after expression.");
+            Consume(SyntaxKind.Semicolon, "Expect ';' after value.");
             return new PrintStatement(expr);
         }
         private SyntaxNode ParseExpressionStatement()
         {
             SyntaxNode expr = ParseExpression();
-            Consume(SyntaxKind.Semicolon, "Expect expression.");
+            Consume(SyntaxKind.Semicolon, "Expect ';' after expression.");
             return new ExpressionStatement(expr);
         }
 
@@ -422,10 +433,7 @@ namespace Lox
 
             }
 
-            Error(Peek(), "Expect expression.");
-
-            //TODO: fix this
-            return null;
+            throw Error(Peek(), "Expect expression.");
         }
 
         private bool Match(params SyntaxKind[] types)
@@ -484,12 +492,11 @@ namespace Lox
             }
             else
             {
-                Error(Peek(), message);
-                Synchronize();
+                throw Error(Peek(), message);
             }
         }
 
-        private void Error(Token token, string message)
+        private ParseError Error(Token token, string message)
         {
             if (token.Kind == SyntaxKind.Eof)
             {
@@ -499,6 +506,8 @@ namespace Lox
             {
                 _errors.Add(new Error(ErrorType.SyntaxError, token.Line, $" at '{token.Lexeme}'", message));
             }
+
+            return new ParseError();
         }
 
         private void Synchronize()
@@ -521,6 +530,7 @@ namespace Lox
                     case SyntaxKind.While:
                     case SyntaxKind.For:
                     case SyntaxKind.Return:
+                    case SyntaxKind.Print:
                         return;
                 }
 
